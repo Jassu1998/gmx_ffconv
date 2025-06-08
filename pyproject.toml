@@ -1,0 +1,17 @@
+[project]
+name = "gmx_ffconv"
+version = "0.1.0"
+description = "An automated GROMACS force field converter tool"
+authors = [{ name = "Jasmine E. Aaltonen" }]
+requires-python = ">=3.8"
+dependencies = [
+    "numpy",
+    "networkx"
+]
+
+[project.scripts]
+gmx_ffconv = "gmx_ffconv.cli:main"
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"

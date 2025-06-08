@@ -1,0 +1,42 @@
+
+import argparse
+from pathlib import Path
+from gmx_ffconv.utilities.ffmap import run_ffmap
+from gmx_ffconv.utilities.groconv import run_groconv
+
+def main():
+    parser = argparse.ArgumentParser(description="GROMACS FF/GRO converter")
+    subparsers = parser.add_subparsers(dest="command", required=True)
+    # --- ffmap subcommand ---
+    ffmap_parser = subparsers.add_parser("ffmap", help="Convert force field files")
+    ffmap_parser.add_argument("-itp1", required=True, help="First ITP file (path)",type=Path)
+    ffmap_parser.add_argument("-itp2", required=True, help="Second ITP file (path)", type=Path)
+    ffmap_parser.add_argument("-name", required=True, help="Name of the molecule")
+    ffmap_parser.add_argument("--prot", action="store_true",
+                              help="Use identity mapping for proteins (skip graph matching)")
+    ffmap_parser.add_argument("--all_mappings", action="store_true",
+                              help="Obtain all mappings, not recommended")
+    ffmap_parser.set_defaults(func=run_ffmap)
+
+
+    # --- groconv subcommand ---
+    groconv_parser =subparsers.add_parser("groconv", help="Maps gro")
+    groconv_parser.add_argument("-name", nargs="+",required=True, help="Molecule names separated by spaces")
+    groconv_parser.add_argument("-nmol",nargs="+", required=True, help="Molecule counts separated by spaces")
+    groconv_parser.add_argument("-coordfile", required=True, help="Input .gro file")
+    groconv_parser.add_argument("-mapping_dir", default=".", help="Directory containing mapping CSV files")
+    groconv_parser.add_argument("-output", required=True, help="Output .gro file name")
+
+
+    args = parser.parse_args()
+    if args.command is None:
+        parser._print_help()
+        parser.exit(1)
+
+    if args.command == "ffmap":
+        run_ffmap(args)
+    elif args.command == "groconv":
+        run_groconv(args)
+
+if __name__ == "__main__":
+    main()
