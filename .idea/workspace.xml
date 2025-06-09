@@ -5,7 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ca9d18f0-9fe5-481b-9f13-2c6072c1c44b" name="Changes" comment="Updated commands">
-      <change beforePath="$PROJECT_DIR$/gmx_ffconv/utilities/utilities_ffmap/mapping_standard.py" beforeDir="false" afterPath="$PROJECT_DIR$/gmx_ffconv/utilities/utilities_ffmap/mapping_standard.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -149,7 +149,23 @@
       <option name="project" value="LOCAL" />
       <updated>1749434426130</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Updated commands">
+      <option name="closed" value="true" />
+      <created>1749434593429</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1749434593429</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Updated commands">
+      <option name="closed" value="true" />
+      <created>1749434672569</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1749434672569</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">

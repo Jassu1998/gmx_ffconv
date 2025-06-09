@@ -9,7 +9,8 @@ def run_ffmap_standard(args):
         for i in mappings:
             with open(f"mapping_{args.name}.csv", "w", newline='') as f:
                 writer = csv.writer(f)
-                writer.writerow([{i}, {i}])
+                writer.writerow([args.itp1, args.itp2])
+                writer.writerow([i, i])
         print(f"Duplicated mapping written with {len(mappings)} identity pairs.")
         return
     bonds1 = read_bonds_section(args.itp1)
