@@ -9,7 +9,7 @@ def main():
     subparsers = parser.add_subparsers(dest="command", required=True)
     # --- ffmap subcommand ---
     ffmap_parser = subparsers.add_parser("ffmap", help="Convert force field files")
-    ffmap_parser.add_argument("-itp1", required=True, help="First ITP file (path)",type=Path)
+    ffmap_parser.add_argument("-itp1", required=True, help="First ITP file (path), corresponding to force field used in .gro file",type=Path)
     ffmap_parser.add_argument("-itp2", required=True, help="Second ITP file (path)", type=Path)
     ffmap_parser.add_argument("-name", required=True, help="Name of the molecule")
     ffmap_parser.add_argument("--duplicate", action="store_true",
