@@ -6,11 +6,13 @@ def run_ffmap_standard(args):
     if args.duplicate:
         # Simple identity mapping: atom i → atom i
         mappings = [(i, i) for i in range(len(atoms1))]
-        for i in mappings:
-            with open(f"mapping_{args.name}.csv", "w", newline='') as f:
-                writer = csv.writer(f)
-                writer.writerow([args.itp1, args.itp2])
-                writer.writerow([i, i])
+        with open(f"mapping_{args.name}.csv", "w", newline='') as f:
+            writer = csv.writer(f)
+            # Write the header
+            writer.writerow([args.itp1, args.itp2])
+            # Write each mapping line
+            for i, j in mappings:
+                writer.writerow([i+1, j+1])
         print(f"Duplicated mapping written with {len(mappings)} identity pairs.")
         return
     bonds1 = read_bonds_section(args.itp1)

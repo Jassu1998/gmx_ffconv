@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ca9d18f0-9fe5-481b-9f13-2c6072c1c44b" name="Changes" comment="Updated commands">
+    <list default="true" id="ca9d18f0-9fe5-481b-9f13-2c6072c1c44b" name="Changes" comment="Updated commands and fixed bug in duplicate">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gmx_ffconv/utilities/utilities_ffmap/mapping_standard.py" beforeDir="false" afterPath="$PROJECT_DIR$/gmx_ffconv/utilities/utilities_ffmap/mapping_standard.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -165,12 +166,32 @@
       <option name="project" value="LOCAL" />
       <updated>1749434672569</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Updated commands and fixed bug in duplicate">
+      <option name="closed" value="true" />
+      <created>1749506822474</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1749506822474</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Initial commit" />
     <MESSAGE value="Updated commands" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated commands" />
+    <MESSAGE value="Updated commands and fixed bug in duplicate" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated commands and fixed bug in duplicate" />
   </component>
 </project>
