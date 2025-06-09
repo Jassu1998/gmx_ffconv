@@ -3,7 +3,7 @@ from .graph_functions import *
 
 def run_ffmap_standard(args):
     atoms1 = read_atoms_section(args.itp1)
-    if args.prot:
+    if args.duplicate:
         # Simple identity mapping: atom i → atom i
         mappings = [(i, i) for i in range(len(atoms1))]
         for i in mappings:
