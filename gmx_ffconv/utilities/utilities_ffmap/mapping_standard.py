@@ -10,7 +10,7 @@ def run_ffmap_standard(args):
             with open(f"mapping_{args.name}.csv", "w", newline='') as f:
                 writer = csv.writer(f)
                 writer.writerow([{i}, {i}])
-        print(f"Protein mapping written with {len(mappings)} identity pairs.")
+        print(f"Duplicated mapping written with {len(mappings)} identity pairs.")
         return
     bonds1 = read_bonds_section(args.itp1)
     atoms2 = read_atoms_section(args.itp2)
