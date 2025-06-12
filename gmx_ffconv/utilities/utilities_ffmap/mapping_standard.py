@@ -13,7 +13,13 @@ def run_ffmap_standard(args):
             # Write each mapping line
             for i, j in mappings:
                 writer.writerow([i+1, j+1])
-        print(f"Duplicated mapping written with {len(mappings)} identity pairs.")
+        with open(f"back_mapping_{args.name}.csv", "w", newline='') as f:
+            writer = csv.writer(f)
+            # Write the header
+            writer.writerow([args.itp1, args.itp2])
+            # Write each mapping line
+            for i, j in mappings:
+                writer.writerow([i+1, j+1])
         return
     bonds1 = read_bonds_section(args.itp1)
     atoms2 = read_atoms_section(args.itp2)
