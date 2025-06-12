@@ -49,20 +49,16 @@ Now, you can convert it to CHARMM to as follows:
 
 gmx_ffconv groconv -coordfile MEMB_AMBER.gro -nmol 12 12 12 2 2 1332 -name DPPC CHL DOPE POT CL SOL -output MEMB_CHARMM.gro
 
-I would recommend moving the mapping files into another directory, perhaps a user created database for their most commonly used mappings.   
-As groconv does accept a mapping directory (e.g. AMBER_TO_CHARMM) as input, this enables users to create a reusable database for their most common mappings instead of having to always run ffmap.
-
-Now, you should run ffmap again, with this time the order of itp files reversed to create a mapping from CHARMM to AMBER (ignoring the ones with --duplicate)  
 After, you should run:
 
 gmx_ffconv groconv -coordfile MEMB_CHARMM.gro -nmol 12 12 12 2 2 1332 -name DPPC CHL DOPE POT CL SOL -output backconv_MEMB_AMBER.gro
 
 Validation:
 
-To validate the mapping obtained, users should carry out a single-point energy calculation on the original coordinate file and the backconverted structure.
+To validate the mapping obtained, users should carry out a single-point energy calculation on the original coordinate file and the backconverted structure. gmx_ffconv does automatically generate the backconverted structure, simply named backconv_{coordfilename}
 
-
-To do:
-- perform automatically the backconversion, instead of requiring the user to first do a forward conversion and then a backwards one.
+Useful tips:
+I would recommend moving the mapping files into another directory, perhaps a user created database for their most commonly used mappings.   
+As groconv does accept a mapping directory (e.g. AMBER_TO_CHARMM) as input, this enables users to create a reusable database for their most common mappings instead of having to always run ffmap.
 
 If you find my tool useful, please cite:
