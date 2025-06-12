@@ -32,15 +32,28 @@ def mapping_writer(args, mappings):
         # single file
         mapping = mappings[0]
         matched_indices = sorted(mapping.items(), key=lambda x: x[1])
+        back_matched = sorted(mapping.items(), key=lambda x: x[0])
+        back_match_sorted = [(b, a) for (a, b) in back_matched]
         with open(f"mapping_{args.name}.csv", "w", newline='') as f:
             writer = csv.writer(f)
             writer.writerow([args.itp1, args.itp2])
             writer.writerows(matched_indices)
+        with open(f"back_mapping_{args.name}.csv", "w", newline='') as f:
+            writer = csv.writer(f)
+            writer.writerow([args.itp2, args.itp1])
+            writer.writerows(back_match_sorted)
+
     else:
         # multiple files
         for i, mapping in enumerate(mappings, start=1):
             matched_indices = sorted(mapping.items(), key=lambda x: x[1])
+            back_matched = sorted(mapping.items(), key=lambda x: x[0])
+            back_match_sorted = [(b, a) for (a, b) in back_matched]
             with open(f"mapping_{args.name}_{i}.csv", "w", newline='') as f:
                 writer = csv.writer(f)
                 writer.writerow([args.itp1, args.itp2])
                 writer.writerows(matched_indices)
+            with open(f"back_mapping_{args.name}_{i}.csv", "w", newline='') as f:
+                writer = csv.writer(f)
+                writer.writerow([args.itp2, args.itp1])
+                writer.writerows(back_match_sorted)

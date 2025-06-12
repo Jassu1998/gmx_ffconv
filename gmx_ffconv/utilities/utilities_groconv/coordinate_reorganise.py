@@ -64,6 +64,33 @@ def reorder_full_gro(atom_lines, molecules, mapping_dir="."):
         raise ValueError("Some atom lines were not processed. Mismatch in molecule counts?")
     return reordered_lines
 
+def reorder_full_gro_backconv(atom_lines, molecules, mapping_dir="."):
+    reordered_lines = []
+    idx = 0
+    for mol_name, mol_count in molecules:
+        mapping_file = os.path.join(mapping_dir, f"back_mapping_{mol_name}.csv")
+        if not os.path.isfile(mapping_file):
+            raise FileNotFoundError(f"Mapping file not found: {mapping_file}")
+        mapping = read_mapping(mapping_file)
+        natoms_per_mol = len(mapping)
+        for mol_index in range(mol_count):
+            start = idx
+            end = idx + natoms_per_mol
+            if end > len(atom_lines):
+                raise ValueError(f"Not enough lines for {mol_name} molecule {mol_index}")
+            mol_lines = atom_lines[start:end]
+            # Apply mapping to this individual molecule
+            reordered_mol = [None] * natoms_per_mol
+            for orig, new in mapping:
+                reordered_mol[new - 1] = mol_lines[orig - 1]
+            if any(x is None for x in reordered_mol):
+                raise RuntimeError(f"Incomplete mapping for {mol_name} molecule {mol_index}")
+            reordered_lines.extend(reordered_mol)
+            idx += natoms_per_mol
+    if idx != len(atom_lines):
+        raise ValueError("Some atom lines were not processed. Mismatch in molecule counts?")
+    return reordered_lines
+
 def write_gro_file(filename, title, reordered_atoms, box_line):
     with open(filename, 'w') as f:
         f.write(f"{title}\n")
