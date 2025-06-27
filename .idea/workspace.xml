@@ -4,9 +4,31 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ca9d18f0-9fe5-481b-9f13-2c6072c1c44b" name="Changes" comment="Updated commands and fixed bug in duplicate">
+    <list default="true" id="ca9d18f0-9fe5-481b-9f13-2c6072c1c44b" name="Changes" comment="New functionality, writes the back-converted structure automatically">
+      <change afterPath="$PROJECT_DIR$/gmx_ffconv/BZAA_CHARMM.gro" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gmx_ffconv/data/toppar_AMBER/BZAA.itp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gmx_ffconv/data/toppar_AMBER/CHL.itp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gmx_ffconv/data/toppar_AMBER/Cl-.itp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gmx_ffconv/data/toppar_AMBER/K+.itp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gmx_ffconv/data/toppar_AMBER/OOPE.itp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gmx_ffconv/data/toppar_AMBER/PPPC.itp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gmx_ffconv/data/toppar_AMBER/TP3.itp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gmx_ffconv/data/toppar_AMBER/forcefield.itp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gmx_ffconv/data/toppar_CHARMM/BZAA.itp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gmx_ffconv/data/toppar_CHARMM/CHL1.itp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gmx_ffconv/data/toppar_CHARMM/CLA.itp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gmx_ffconv/data/toppar_CHARMM/DOPE.itp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gmx_ffconv/data/toppar_CHARMM/DPPC.itp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gmx_ffconv/data/toppar_CHARMM/POT.itp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gmx_ffconv/data/toppar_CHARMM/TIP3.itp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gmx_ffconv/data/toppar_CHARMM/forcefield.itp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gmx_ffconv.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gmx_ffconv.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gmx_ffconv/cli.py" beforeDir="false" afterPath="$PROJECT_DIR$/gmx_ffconv/cli.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gmx_ffconv/utilities/groconv.py" beforeDir="false" afterPath="$PROJECT_DIR$/gmx_ffconv/utilities/groconv.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gmx_ffconv/utilities/utilities_ffmap/graph_functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/gmx_ffconv/utilities/utilities_ffmap/graph_functions.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gmx_ffconv/utilities/utilities_ffmap/mapping_standard.py" beforeDir="false" afterPath="$PROJECT_DIR$/gmx_ffconv/utilities/utilities_ffmap/mapping_standard.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pyproject.toml" beforeDir="false" afterPath="$PROJECT_DIR$/pyproject.toml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,21 +65,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;Python.__init__.executor&quot;: &quot;Run&quot;,
-    &quot;Python.mapping_standard.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/jasmine/Documents/gmx_ffconv/gmx_ffconv/data/BZAA&quot;,
-    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
-    &quot;two.files.diff.last.used.file&quot;: &quot;/Users/jasmine/Documents/gmx_ffconv/gmx_ffconv/data/TOY_ITPS/MEMB_AMBER_DRY.gro&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "Python.__init__.executor": "Run",
+    "Python.cli.executor": "Run",
+    "Python.graph_functions.executor": "Run",
+    "Python.mapping_standard.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "/Users/jasmine/Documents/gmx_ffconv/gmx_ffconv",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable",
+    "two.files.diff.last.used.file": "/Users/jasmine/Documents/gmx_ffconv/gmx_ffconv/data/TOY_ITPS/MEMB_AMBER_DRY.gro"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/gmx_ffconv" />
+      <recent name="$PROJECT_DIR$/gmx_ffconv/data" />
       <recent name="$PROJECT_DIR$/gmx_ffconv/data/BZAA" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -67,7 +94,7 @@
       <recent name="$PROJECT_DIR$/gmx_ffconv" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.mapping_standard">
+  <component name="RunManager" selected="Python.cli">
     <configuration name="__init__" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="gmx_ffconv" />
       <option name="ENV_FILES" value="" />
@@ -82,6 +109,50 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/gmx_ffconv/__init__.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="cli" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+      <module name="gmx_ffconv" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/gmx_ffconv" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/gmx_ffconv/cli.py" />
+      <option name="PARAMETERS" value="groconv -name BZAA -nmol 1 -coordfile BZAA_CHARMM.gro -output BZAA_AMBER.gro --validate" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="graph_functions" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="gmx_ffconv" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/gmx_ffconv/utilities/utilities_ffmap" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/gmx_ffconv/utilities/utilities_ffmap/graph_functions.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -114,6 +185,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.graph_functions" />
         <item itemvalue="Python.mapping_standard" />
         <item itemvalue="Python.__init__" />
       </list>
@@ -174,7 +246,23 @@
       <option name="project" value="LOCAL" />
       <updated>1749506822474</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Updated commands and fixed bug in duplicate">
+      <option name="closed" value="true" />
+      <created>1749508902758</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1749508902758</updated>
+    </task>
+    <task id="LOCAL-00007" summary="New functionality, writes the back-converted structure automatically">
+      <option name="closed" value="true" />
+      <created>1749686733963</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1749686733963</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -182,7 +270,19 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="master" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
@@ -192,6 +292,7 @@
     <MESSAGE value="Initial commit" />
     <MESSAGE value="Updated commands" />
     <MESSAGE value="Updated commands and fixed bug in duplicate" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated commands and fixed bug in duplicate" />
+    <MESSAGE value="New functionality, writes the back-converted structure automatically" />
+    <option name="LAST_COMMIT_MESSAGE" value="New functionality, writes the back-converted structure automatically" />
   </component>
 </project>

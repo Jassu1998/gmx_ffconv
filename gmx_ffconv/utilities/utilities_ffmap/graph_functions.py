@@ -4,10 +4,12 @@ import csv
 def build_graph(atoms, bonds):
     G = nx.Graph()
     for idx, atom_type in atoms.items():
+        print(idx,atom_type)
         G.add_node(idx, atom_type=atom_type)
     for i, j in bonds:
         G.add_edge(i, j)
     return G
+
 def match_graphs(atoms1, bonds1, atoms2, bonds2,all_mappings=False):
     G1 = build_graph(atoms1, bonds1)
     G2 = build_graph(atoms2, bonds2)
@@ -27,33 +29,29 @@ def match_graphs(atoms1, bonds1, atoms2, bonds2,all_mappings=False):
         except StopIteration:
             raise ValueError("Graphs are not isomorphic.")
 
-def mapping_writer(args, mappings):
+def mapping_writer(args, mappings, mapping_filename="mapping"):
+    # Decide header order
+    if mapping_filename == "mapping":
+        header = [args.itp1, args.itp2]
+    elif mapping_filename == "back_mapping":
+        header = [args.itp2, args.itp1]
+    else:
+        header = [args.itp1, args.itp2]  # default
+
     if len(mappings) == 1:
-        # single file
         mapping = mappings[0]
         matched_indices = sorted(mapping.items(), key=lambda x: x[1])
-        back_matched = sorted(mapping.items(), key=lambda x: x[0])
-        back_match_sorted = [(b, a) for (a, b) in back_matched]
-        with open(f"mapping_{args.name}.csv", "w", newline='') as f:
+        filename = f"{mapping_filename}_{args.name}.csv"
+        with open(filename, "w", newline='') as f:
             writer = csv.writer(f)
-            writer.writerow([args.itp1, args.itp2])
+            writer.writerow(header)
             writer.writerows(matched_indices)
-        with open(f"back_mapping_{args.name}.csv", "w", newline='') as f:
-            writer = csv.writer(f)
-            writer.writerow([args.itp2, args.itp1])
-            writer.writerows(back_match_sorted)
-
     else:
-        # multiple files
         for i, mapping in enumerate(mappings, start=1):
             matched_indices = sorted(mapping.items(), key=lambda x: x[1])
-            back_matched = sorted(mapping.items(), key=lambda x: x[0])
-            back_match_sorted = [(b, a) for (a, b) in back_matched]
-            with open(f"mapping_{args.name}_{i}.csv", "w", newline='') as f:
+            filename = f"{mapping_filename}_{args.name}_{i}.csv"
+            with open(filename, "w", newline='') as f:
                 writer = csv.writer(f)
-                writer.writerow([args.itp1, args.itp2])
+                writer.writerow(header)
                 writer.writerows(matched_indices)
-            with open(f"back_mapping_{args.name}_{i}.csv", "w", newline='') as f:
-                writer = csv.writer(f)
-                writer.writerow([args.itp2, args.itp1])
-                writer.writerows(back_match_sorted)
+

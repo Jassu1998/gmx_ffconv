@@ -16,12 +16,13 @@ def run_groconv(args):
         f.writelines(reordered)
         f.write(f"{gro_data['box_line']}\n")
     print(f"Successfully generated {args.output}")
-    gro_backconv = read_gro_atoms(filename=args.output)
-    atom_lines_back = gro_backconv["atom_lines"]
-    reordered_back = reorder_full_gro_backconv(atom_lines_back,molecules,mapping_dir=args.mapping_dir)
-    with open(f"backconv_{args.coordfile}",'w') as f:
-        f.write(f"{gro_backconv['title']}\n")
-        f.write(f"{gro_backconv['atom_count']}\n")
-        f.writelines(reordered_back)
-        f.write(f"{gro_backconv['box_line']}\n")
-    print(f"Successfully generated backconv_{args.output}")
+    if args.validate:
+        gro_backconv = read_gro_atoms(filename=args.output)
+        atom_lines_back = gro_backconv["atom_lines"]
+        reordered_back = reorder_full_gro_backconv(atom_lines_back,molecules,mapping_dir=args.mapping_dir)
+        with open(f"backconv_{args.coordfile}",'w') as f:
+            f.write(f"{gro_backconv['title']}\n")
+            f.write(f"{gro_backconv['atom_count']}\n")
+            f.writelines(reordered_back)
+            f.write(f"{gro_backconv['box_line']}\n")
+        print(f"Successfully generated backconv_{args.coordfile}")

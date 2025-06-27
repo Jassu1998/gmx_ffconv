@@ -11,11 +11,13 @@ def main():
     ffmap_parser = subparsers.add_parser("ffmap", help="Finds mapping between two force fields for each molecule type")
     ffmap_parser.add_argument("-itp1", required=True, help="First ITP file (path), corresponding to force field used in .gro file",type=Path)
     ffmap_parser.add_argument("-itp2", required=True, help="Second ITP file (path)", type=Path)
-    ffmap_parser.add_argument("-name", required=True, help="Name of the molecule")
+    ffmap_parser.add_argument("-name", required=True, help="Name of the molecule, does not need to match itp files")
     ffmap_parser.add_argument("--duplicate", action="store_true",
                               help="Skip graph matching, create a mapping where everything is kept in same order. Useful for proteins, solvent,ions ")
     ffmap_parser.add_argument("--all_mappings", action="store_true",
                               help="Obtain all mappings, not recommended")
+    ffmap_parser.add_argument("--validate", action="store_true",
+                              help="Carry out conversion in both directions")
     ffmap_parser.set_defaults(func=run_ffmap)
 
 
@@ -26,6 +28,7 @@ def main():
     groconv_parser.add_argument("-coordfile", required=True, help="Input .gro file")
     groconv_parser.add_argument("-mapping_dir", default=".", help="Directory containing mapping CSV files")
     groconv_parser.add_argument("-output", required=True, help="Output .gro file name")
+    groconv_parser.add_argument("--validate", action="store_true", help="Generate back-converted structure")
 
 
     args = parser.parse_args()

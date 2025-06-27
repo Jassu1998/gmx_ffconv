@@ -24,8 +24,16 @@ def run_ffmap_standard(args):
     bonds1 = read_bonds_section(args.itp1)
     atoms2 = read_atoms_section(args.itp2)
     bonds2 = read_bonds_section(args.itp2)
+    if args.all_mappings and args.validate:
+        raise ValueError("Cannot use --all-mappings and --validate together.")
     if args.all_mappings:
         mappings =match_graphs(atoms1, bonds1, atoms2, bonds2,all_mappings=True)
+        mapping_writer(args, mappings=mappings)
+    elif args.validate:
+        mappings = match_graphs(atoms1, bonds1, atoms2, bonds2)
+        mappings_back = match_graphs(atoms2, bonds2, atoms1, bonds1)
+        mapping_writer(args,mappings=mappings,mapping_filename="mapping")
+        mapping_writer(args,mappings=mappings_back,mapping_filename="back_mapping")
     else:
         mappings = match_graphs(atoms1, bonds1, atoms2, bonds2)  # all_mappings="false"
-    mapping_writer(args,mappings=mappings)
+        mapping_writer(args,mappings=mappings)
