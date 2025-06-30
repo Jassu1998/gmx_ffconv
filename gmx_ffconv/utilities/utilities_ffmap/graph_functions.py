@@ -4,7 +4,6 @@ import csv
 def build_graph(atoms, bonds):
     G = nx.Graph()
     for idx, atom_type in atoms.items():
-        print(idx,atom_type)
         G.add_node(idx, atom_type=atom_type)
     for i, j in bonds:
         G.add_edge(i, j)
