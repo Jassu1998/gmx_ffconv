@@ -33,6 +33,17 @@ optional arguments:
                         Directory containing mapping CSV files  
   -output OUTPUT        Output .gro file name  
   --validate            Generate back-converted structure  
+
+
+# Installation instructions:
+
+The easiest way to install gmx_ffconv is to clone the github, cd in gmx_ffconv and running pip install .
+Note, it is considered good practice to perform this in a virtual environment.
+
+Possible issues:
+
+If the installation contains a message about installing an UNKNOWN package, please update your pip version. 
+
 # *Example:*
 
 The files are provided in “Tutorial” in folder Example1 
