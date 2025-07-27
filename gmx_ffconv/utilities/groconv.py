@@ -1,4 +1,4 @@
-from .utilities_groconv.coordinate_reorganise import read_gro_atoms, reorder_full_gro, reorder_full_gro_backconv
+from .utilities_groconv.coordinate_reorganise import read_gro_atoms, reorder_full_gro, reorder_full_gro_backconv, rewrite_gro_with_itp_data
 
 def run_groconv(args):
     gro_data = read_gro_atoms(filename=args.coordfile)
@@ -26,3 +26,11 @@ def run_groconv(args):
             f.writelines(reordered_back)
             f.write(f"{gro_backconv['box_line']}\n")
         print(f"Successfully generated backconv_{args.coordfile}")
+
+    gro_data = read_gro_atoms(f"{args.output}")
+    fixed_atom_lines = rewrite_gro_with_itp_data(gro_data["atom_lines"], molecules, mapping_dir=".")
+    with open(args.output, 'w') as f:
+        f.write(f"{gro_data['title']}\n")
+        f.write(f"{gro_data['atom_count']}\n")
+        f.writelines(fixed_atom_lines)
+        f.write(f"{gro_data['box_line']}\n")

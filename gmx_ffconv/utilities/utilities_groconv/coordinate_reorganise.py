@@ -91,6 +91,79 @@ def reorder_full_gro_backconv(atom_lines, molecules, mapping_dir="."):
         raise ValueError("Some atom lines were not processed. Mismatch in molecule counts?")
     return reordered_lines
 
+import csv
+
+def get_itp_path_from_mapping(mapping_file):
+    with open(mapping_file, newline='') as f:
+        reader = csv.reader(f)
+        header = next(reader)
+        if len(header) < 2:
+            raise ValueError(f"Mapping file {mapping_file} has fewer than two columns.")
+        return header[1]  # Second column header: itp file path
+def parse_itp_atoms(itp_path):
+    atoms = []
+    with open(itp_path) as f:
+        lines = f.readlines()
+    in_atoms = False
+    for line in lines:
+        stripped = line.strip()
+        if not in_atoms:
+            if stripped.lower().startswith('[ atoms'):
+                in_atoms = True
+        elif stripped == '' or stripped.startswith('['):
+            break
+        elif not stripped.startswith(';'):
+            parts = stripped.split()
+            if len(parts) >= 5:
+                resname = parts[3]
+                atomname = parts[4]
+                atoms.append((resname, atomname))
+    print(atoms)
+    return atoms
+#parse_itp_atoms("../../CHL_AMBER.itp")
+def rewrite_gro_with_itp_data(atom_lines, molecules, mapping_dir="."):
+    updated_lines = []
+    idx = 0
+    global_atom_id = 1
+    global_res_id = 1
+
+    def format_id(id_num):
+        if id_num > 99999:
+            return id_num % 100000
+        else:
+            return id_num
+
+    for mol_name, mol_count in molecules:
+        mapping_csv = os.path.join(mapping_dir, f"mapping_{mol_name}.csv")
+        with open(mapping_csv) as f:
+            second_header = f.readline().strip().split(',')[1]
+        itp_file = second_header.strip()
+        atom_defs = parse_itp_atoms(itp_file)
+        natoms_per_mol = len(atom_defs)
+
+        for _ in range(mol_count):
+            for i in range(natoms_per_mol):
+                old_line = atom_lines[idx].rstrip('\n')
+                resname, atomname = atom_defs[i]
+                resname = resname[:5].ljust(5)
+                atomname = atomname[:5].rjust(5)
+                xyz = old_line[20:44]
+                vel = old_line[44:]
+
+                atom_id_fmt = format_id(global_atom_id)
+                res_id_fmt = format_id(global_res_id)
+
+                new_line = f"{res_id_fmt:5d}{resname}{atomname}{atom_id_fmt:5d}{xyz}{vel}"
+                updated_lines.append(new_line + '\n')
+
+                global_atom_id += 1
+                idx += 1
+            global_res_id += 1
+
+    if idx != len(atom_lines):
+        raise ValueError("Mismatch in total atom lines processed.")
+    return updated_lines
+
 def write_gro_file(filename, title, reordered_atoms, box_line):
     with open(filename, 'w') as f:
         f.write(f"{title}\n")
