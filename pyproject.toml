@@ -11,9 +11,9 @@ dependencies = [
 
 [project.scripts]
 gmx_ffconv = "gmx_ffconv.cli:main"
-
-[tool.setuptools]
-packages = ["gmx_ffconv"]
+[tool.setuptools.packages.find]
+where = ["."]
+exclude = ["Tutorial"]
 
 [build-system]
 requires = ["setuptools"]
