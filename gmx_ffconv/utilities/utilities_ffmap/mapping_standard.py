@@ -1,8 +1,15 @@
-from .file_reader import read_atoms_section,read_bonds_section
+from .file_reader import read_atoms_section,read_bonds_section,read_settles_section
 from .graph_functions import *
 
 def run_ffmap_standard(args):
     atoms1 = read_atoms_section(args.itp1)
+    bonds1 = read_bonds_section(args.itp1)
+    if len(atoms1) != 1 and len(bonds1) == 0:
+        bonds1 = read_settles_section(args.itp1)  # substitute bonds1 with settles
+    atoms2 = read_atoms_section(args.itp2)
+    bonds2 = read_bonds_section(args.itp2)
+    if len(atoms2) != 1 and len(bonds2) == 0:
+        bonds2 = read_settles_section(args.itp2)
     if args.duplicate:
         # Simple identity mapping: atom i → atom i
         mappings = [(i, i) for i in range(len(atoms1))]
@@ -21,9 +28,6 @@ def run_ffmap_standard(args):
             for i, j in mappings:
                 writer.writerow([i+1, j+1])
         return
-    bonds1 = read_bonds_section(args.itp1)
-    atoms2 = read_atoms_section(args.itp2)
-    bonds2 = read_bonds_section(args.itp2)
     if args.all_mappings and args.validate:
         raise ValueError("Cannot use --all-mappings and --validate together.")
     if args.all_mappings:
