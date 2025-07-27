@@ -118,7 +118,7 @@ def parse_itp_atoms(itp_path):
                 atomname = parts[4]
                 atoms.append((resname, atomname))
     return atoms
-def f(atom_lines, molecules, mapping_dir="."):
+def rewrite_gro_with_itp_data(atom_lines, molecules, mapping_dir="."):
     updated_lines = []
     idx = 0
     global_atom_id = 1
