@@ -57,7 +57,6 @@ def read_atoms_section(filename):
                 atom_mass = parts[7]  # Adjust this index if needed
                 element = assign_chemical_element_by_mass(atom_mass)
                 atoms[atom_index] = element
-    print(atoms)
     return atoms
 
 def read_atoms_section_atomname(filename): #
