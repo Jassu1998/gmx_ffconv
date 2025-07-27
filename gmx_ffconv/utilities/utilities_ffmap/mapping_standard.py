@@ -1,6 +1,7 @@
 from .file_reader import read_atoms_section,read_bonds_section,read_settles_section
 from .graph_functions import *
 
+
 def run_ffmap_standard(args):
     atoms1 = read_atoms_section(args.itp1)
     bonds1 = read_bonds_section(args.itp1)
