@@ -91,7 +91,6 @@ def reorder_full_gro_backconv(atom_lines, molecules, mapping_dir="."):
         raise ValueError("Some atom lines were not processed. Mismatch in molecule counts?")
     return reordered_lines
 
-import csv
 
 def get_itp_path_from_mapping(mapping_file):
     with open(mapping_file, newline='') as f:
@@ -119,7 +118,6 @@ def parse_itp_atoms(itp_path):
                 atomname = parts[4]
                 atoms.append((resname, atomname))
     return atoms
-#parse_itp_atoms("../../CHL_AMBER.itp")
 def f(atom_lines, molecules, mapping_dir="."):
     updated_lines = []
     idx = 0
