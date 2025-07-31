@@ -67,7 +67,7 @@ def read_atoms_section_atomname(filename): #
     for line in lines:
         stripped = line.strip()
         if not in_atoms:
-            if stripped.lower().startswith('[ atoms'):
+            if stripped.lower().startswith('[') and 'atoms' in stripped.lower():
                 in_atoms = True
         elif stripped == '':
             break
@@ -87,7 +87,7 @@ def read_bonds_section(filename):
     for line in lines:
         stripped = line.strip()
         if not in_bonds:
-            if stripped.lower().startswith('[ bonds'):
+            if stripped.lower().startswith('[') and 'bonds' in stripped.lower():
                 in_bonds = True
         elif stripped == '':
             break
@@ -96,3 +96,22 @@ def read_bonds_section(filename):
             if len(parts) >= 2:
                 bonds.append((int(parts[0]), int(parts[1])))
     return bonds
+
+def read_settles_section(filename):
+    with open(filename, 'r') as f:
+        lines = f.readlines()
+    bonds = []
+    in_bonds = False
+    for line in lines:
+        stripped = line.strip()
+        if not in_bonds:
+            if stripped.lower().startswith('[') and 'settles' in stripped.lower():
+                in_bonds = True
+        elif stripped == '':
+            break
+        elif not stripped.startswith(';'):
+            parts = stripped.split()
+            if len(parts) >= 2:
+                bonds.append((int(parts[0]), int(parts[1])))
+    return bonds
+
