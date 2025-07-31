@@ -207,3 +207,4 @@ def write_gro_file(filename, title, reordered_atoms, box_line):
         f.write(f"{len(reordered_atoms)}\n")
         f.writelines(reordered_atoms)
         f.write(f"{box_line}\n")
+
