@@ -29,6 +29,7 @@ def main():
     groconv_parser.add_argument("-mapping_dir", default=".", help="Directory containing mapping CSV files")
     groconv_parser.add_argument("-output", required=True, help="Output .gro file name")
     groconv_parser.add_argument("--validate", action="store_true", help="Generate back-converted structure")
+    groconv_parser.add_argument("--norename",action="store_true", help="Do not rename the reordered gro")
 
 
     args = parser.parse_args()
