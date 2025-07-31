@@ -28,7 +28,7 @@ def run_groconv(args):
         print(f"Successfully generated backconv_{args.coordfile}")
 
     gro_data = read_gro_atoms(f"{args.output}")
-    fixed_atom_lines = rewrite_gro_with_itp_data(gro_data["atom_lines"], molecules, mapping_dir=".")
+    fixed_atom_lines = rewrite_gro_with_itp_data(gro_data["atom_lines"], molecules, mapping_dir=args.mapping_dir)
     with open(args.output, 'w') as f:
         f.write(f"{gro_data['title']}\n")
         f.write(f"{gro_data['atom_count']}\n")
