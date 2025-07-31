@@ -130,14 +130,54 @@ def rewrite_gro_with_itp_data(atom_lines, molecules, mapping_dir="."):
         else:
             return id_num
 
-    for mol_name, mol_count in molecules:
-        mapping_csv = os.path.join(mapping_dir, f"mapping_{mol_name}.csv")
-        with open(mapping_csv) as f:
-            second_header = f.readline().strip().split(',')[1]
-        itp_file = second_header.strip()
-        atom_defs = parse_itp_atoms(itp_file)
-        natoms_per_mol = len(atom_defs)
+    mapping_cache = {}
+    atom_defs_cache = {}
 
+    for mol_name, mol_count in molecules:
+        if mol_name not in mapping_cache:
+            mapping_csv = os.path.join(mapping_dir, f"mapping_{mol_name}.csv")
+            try:
+                with open(mapping_csv) as f:
+                    line = f.readline().strip()
+                    parts = line.split(',')
+                    if len(parts) < 2:
+                        raise ValueError(f"Malformed line in {mapping_csv}: {line}")
+                    itp_path_from_csv = parts[1].strip()
+            except FileNotFoundError:
+                raise FileNotFoundError(f"Mapping CSV not found: {mapping_csv}")
+            except Exception as e:
+                raise RuntimeError(f"Error reading {mapping_csv}: {e}")
+
+            # Try direct path first
+            if os.path.isfile(itp_path_from_csv):
+                itp_file = itp_path_from_csv
+            else:
+                # Try relative to mapping_dir
+                combined_path = os.path.join(mapping_dir, itp_path_from_csv)
+                if os.path.isfile(combined_path):
+                    itp_file = combined_path
+                else:
+                    # Prompt user
+                    print(f"\n⚠️  ITP file for molecule '{mol_name}' not found.")
+                    print(f"Tried: '{itp_path_from_csv}' and '{combined_path}'")
+                    while True:
+                        user_input = input(f"Please provide the full path to the ITP file for '{mol_name}': ").strip()
+                        if os.path.isfile(user_input):
+                            itp_file = user_input
+                            break
+                        else:
+                            print(f"❌ File '{user_input}' does not exist. Please try again.")
+
+            try:
+                atom_defs = parse_itp_atoms(itp_file)
+            except Exception as e:
+                raise RuntimeError(f"Failed to parse ITP file '{itp_file}' for molecule '{mol_name}': {e}")
+
+            mapping_cache[mol_name] = itp_file
+            atom_defs_cache[mol_name] = atom_defs
+
+        atom_defs = atom_defs_cache[mol_name]
+        natoms_per_mol = len(atom_defs)
         for _ in range(mol_count):
             for i in range(natoms_per_mol):
                 old_line = atom_lines[idx].rstrip('\n')
