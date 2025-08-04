@@ -3,7 +3,8 @@ name = "gmx_ffconv"
 version = "1.0.0"
 description = "An automated GROMACS force field converter tool"
 readme = "README.md"
-license = { file = "LICENSE" }authors = [{ name = "Jasmine E. Aaltonen" }]
+license = { file = "LICENSE" }
+authors = [{ name = "Jasmine E. Aaltonen" }]
 requires-python = ">=3.8"
 dependencies = [
     "numpy",
