@@ -2,7 +2,7 @@
 gmx_ffconv is a semi-automated, all-atom force field converter for GROMACS.
 It has been developed to be fast and user-friendly, and doesn't require users to known any programming.  
 gmx_ffconv requires users to provide included topology files for the molecules they want to convert in the current and new force field, it does not generate or interpolate force field parameters.
-# Usage:#
+# Usage: 
 gmx_ffconv ffmap -h  
 usage: gmx_ffconv ffmap [-h] -itp1 ITP1 -itp2 ITP2 -name NAME [--duplicate]
                         [--all_mappings] [--validate]  
@@ -90,7 +90,7 @@ gmx_ffconv groconv -coordfile CHARMM_MEMB.gro -name DOPE DPPC CHL POT CLA TIP3P 
 
 We can now compare the AMBER_MEMB_from_CHARMM.gro to AMBER_MEMB_FF.gro, which will match in energy values if the conversion has been successful. This file is provided in the AMBER_REF folder with the necessary files.
 
-# Citation #
+# Citation 
 
 If you find my tool useful, please cite:
 Jasmine E. Aaltonen, gmx_ffconv: A Fast, User-Friendly Semi-Automated All-Atom Force Field Converter for GROMACS, under review (2025)
