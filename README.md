@@ -1,26 +1,26 @@
 # gmx_ffconv
-A semi-automated force field converter for GROMACS  
+gmx_ffconv is a semi-automated, all-atom force field converter for GROMACS. It has been developed to be fast and user-friendly, and doesn't require users to known any programming.  
 
 Usage:
 
-usage: gmx_ffconv ffmap [-h] -itp1 ITP1 -itp2 ITP2 -name NAME [--duplicate]  
+gmx_ffconv ffmap -h  
+usage: gmx_ffconv ffmap [-h] -itp1 ITP1 -itp2 ITP2 -name NAME [--duplicate]
                         [--all_mappings] [--validate]  
 
-optional arguments:
+optional arguments:  
   -h, --help      show this help message and exit  
-  -itp1 ITP1      First ITP file (path), corresponding to force field used in
-                  .gro file  
+  -itp1 ITP1      First ITP file (path), corresponding to force field used in  
+                  .gro file
   -itp2 ITP2      Second ITP file (path)  
   -name NAME      Name of the molecule, does not need to match itp files  
-  --duplicate     Skip graph matching, create a mapping where everything is  
-                  kept in same order. Useful for proteins, solvent,ions  
+  --duplicate     Skip graph matching, create a mapping where everything is kept in same order. Only useful when part of the coordinate file needs reordering. 
   --all_mappings  Obtain all mappings, not recommended  
   --validate      Carry out conversion in both directions  
 
 
 usage: gmx_ffconv groconv [-h] -name NAME [NAME ...] -nmol NMOL [NMOL ...]  
                           -coordfile COORDFILE [-mapping_dir MAPPING_DIR]  
-                          -output OUTPUT [--validate]  
+                          -output OUTPUT [--validate] [--norename]  
 
 optional arguments:  
   -h, --help            show this help message and exit  
@@ -33,10 +33,14 @@ optional arguments:
                         Directory containing mapping CSV files  
   -output OUTPUT        Output .gro file name  
   --validate            Generate back-converted structure  
-
-
+  --norename            Do not rename the reordered gro  
 # Installation instructions:
 
+
+The recommended way of installing gmx_ffconv is with pip:
+pip install gmx_ffconv  
+
+Alternatively
 The easiest way to install gmx_ffconv is to clone the github, cd in gmx_ffconv and running pip install .
 Note, it is considered good practice to perform this in a virtual environment.
 
@@ -68,15 +72,13 @@ gmx_ffconv ffmap -itp1 toppar_CHARMM/DOPE.itp -itp2 toppar_AMBER/OOPE.itp -name 
 
 TIP3
 
-gmx_ffconv ffmap -itp1 toppar_CHARMM/TIP3.itp -itp2 None -name TIP3P --duplicate
-
+gmx_ffconv ffmap -itp1 toppar_CHARMM/TIP3.itp -itp2 toppar_AMBER/TP3.itp -name TIP3P 
 Potassium 
 
-gmx_ffconv ffmap -itp1 toppar_CHARMM/POT.itp -itp2 None -name POT --duplicate
-
+gmx_ffconv ffmap -itp1 toppar_CHARMM/POT.itp -itp2 toppar_AMBER/K+.itp -name POT 
 Chloride
 
-gmx_ffconv ffmap -itp1 toppar_CHARMM/CLA.itp -itp2 None -name CLA --duplicate
+gmx_ffconv ffmap -itp1 toppar_CHARMM/CLA.itp -itp2 toppar_AMBER/Cl-.itp -name CLA 
 
 
 These should have generated multiple mapping files, a mapping file per molecule type named mapping_{NAME}.csv.
@@ -88,3 +90,9 @@ gmx_ffconv groconv -coordfile CHARMM_MEMB.gro -name DOPE DPPC CHL POT CLA TIP3P 
 We can now compare the AMBER_MEMB_from_CHARMM.gro to AMBER_MEMB_FF.gro, which will match in energy values if the conversion has been successful. This file is provided in the AMBER_REF folder with the necessary files.
 
 If you find my tool useful, please cite:
+
+Jasmine E. Aaltonen, gmx_ffconv: A Fast, User-Friendly Semi-Automated All-Atom Force Field Converter for GROMACS, under review (2025)
+[![DOI](https://zenodo.org/badge/998544959.svg)](https://zenodo.org/badge/latestdoi/998544959)
+
+![PyPI](https://img.shields.io/pypi/v/gmx_ffconv?label=pypi%20package)
+![PyPI - Downloads](https://img.shields.io/pypi/dm/gmx_ffconv)
