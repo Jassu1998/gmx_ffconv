@@ -1,8 +1,8 @@
 # gmx_ffconv
-gmx_ffconv is a semi-automated, all-atom force field converter for GROMACS. It has been developed to be fast and user-friendly, and doesn't require users to known any programming.  
-
-Usage:
-
+gmx_ffconv is a semi-automated, all-atom force field converter for GROMACS.
+It has been developed to be fast and user-friendly, and doesn't require users to known any programming.  
+gmx_ffconv requires users to provide included topology files for the molecules they want to convert in the current and new force field, it does not generate or interpolate force field parameters.
+# Usage:#
 gmx_ffconv ffmap -h  
 usage: gmx_ffconv ffmap [-h] -itp1 ITP1 -itp2 ITP2 -name NAME [--duplicate]
                         [--all_mappings] [--validate]  
@@ -34,12 +34,13 @@ optional arguments:
   -output OUTPUT        Output .gro file name  
   --validate            Generate back-converted structure  
   --norename            Do not rename the reordered gro  
+
 # Installation instructions:
 
 
 The recommended way of installing gmx_ffconv is with pip:
 pip install gmx_ffconv  
-
+[![PyPI version](https://img.shields.io/pypi/v/gmx_ffconv?label=PyPI)](https://pypi.org/project/gmx_ffconv/)
 Alternatively
 The easiest way to install gmx_ffconv is to clone the github, cd in gmx_ffconv and running pip install .
 Note, it is considered good practice to perform this in a virtual environment.
@@ -89,10 +90,10 @@ gmx_ffconv groconv -coordfile CHARMM_MEMB.gro -name DOPE DPPC CHL POT CLA TIP3P 
 
 We can now compare the AMBER_MEMB_from_CHARMM.gro to AMBER_MEMB_FF.gro, which will match in energy values if the conversion has been successful. This file is provided in the AMBER_REF folder with the necessary files.
 
-If you find my tool useful, please cite:
+# Citation #
 
+If you find my tool useful, please cite:
 Jasmine E. Aaltonen, gmx_ffconv: A Fast, User-Friendly Semi-Automated All-Atom Force Field Converter for GROMACS, under review (2025)
 [![DOI](https://zenodo.org/badge/998544959.svg)](https://zenodo.org/badge/latestdoi/998544959)
 
-![PyPI](https://img.shields.io/pypi/v/gmx_ffconv?label=pypi%20package)
-![PyPI - Downloads](https://img.shields.io/pypi/dm/gmx_ffconv)
+
