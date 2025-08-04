@@ -1,11 +1,13 @@
 import os
 import csv
+# Reads a mapping file, returns pairs
 def read_mapping(mapping_file):
     with open(mapping_file, newline='') as f:
         reader = csv.reader(f)
         next(reader)  # skip header
         return [(int(row[0]), int(row[1])) for row in reader]
 
+#Reads a gro file, returns the contents
 def read_gro_atoms(filename):
     with open(filename, 'r') as f:
         lines = f.readlines()
@@ -20,6 +22,7 @@ def read_gro_atoms(filename):
         "box_line": box_line
     }
 
+#Reorders a gro file using the new order from each of the mapping files, performs this sequentially for each molecule type
 def reorder_block_atoms(atom_lines, start_idx, mapping, n_mols):
     n_atoms_per_mol = len(mapping)
     expected_block_size = n_mols * n_atoms_per_mol
@@ -118,21 +121,19 @@ def parse_itp_atoms(itp_path):
                 atomname = parts[4]
                 atoms.append((resname, atomname))
     return atoms
+
 def rewrite_gro_with_itp_data(atom_lines, molecules, mapping_dir="."):
     updated_lines = []
     idx = 0
     global_atom_id = 1
     global_res_id = 1
-
     def format_id(id_num):
         if id_num > 99999:
             return id_num % 100000
         else:
             return id_num
-
     mapping_cache = {}
     atom_defs_cache = {}
-
     for mol_name, mol_count in molecules:
         if mol_name not in mapping_cache:
             mapping_csv = os.path.join(mapping_dir, f"mapping_{mol_name}.csv")
@@ -147,7 +148,6 @@ def rewrite_gro_with_itp_data(atom_lines, molecules, mapping_dir="."):
                 raise FileNotFoundError(f"Mapping CSV not found: {mapping_csv}")
             except Exception as e:
                 raise RuntimeError(f"Error reading {mapping_csv}: {e}")
-
             # Try direct path first
             if os.path.isfile(itp_path_from_csv):
                 itp_file = itp_path_from_csv
@@ -157,8 +157,7 @@ def rewrite_gro_with_itp_data(atom_lines, molecules, mapping_dir="."):
                 if os.path.isfile(combined_path):
                     itp_file = combined_path
                 else:
-                    # Prompt user
-                    print(f"\n⚠️  ITP file for molecule '{mol_name}' not found.")
+                    print(f"ITP file for molecule '{mol_name}' not found.")
                     print(f"Tried: '{itp_path_from_csv}' and '{combined_path}'")
                     while True:
                         user_input = input(f"Please provide the full path to the ITP file for '{mol_name}': ").strip()
@@ -166,16 +165,13 @@ def rewrite_gro_with_itp_data(atom_lines, molecules, mapping_dir="."):
                             itp_file = user_input
                             break
                         else:
-                            print(f"❌ File '{user_input}' does not exist. Please try again.")
-
+                            print(f"File '{user_input}' does not exist. Please try again.")
             try:
                 atom_defs = parse_itp_atoms(itp_file)
             except Exception as e:
                 raise RuntimeError(f"Failed to parse ITP file '{itp_file}' for molecule '{mol_name}': {e}")
-
             mapping_cache[mol_name] = itp_file
             atom_defs_cache[mol_name] = atom_defs
-
         atom_defs = atom_defs_cache[mol_name]
         natoms_per_mol = len(atom_defs)
         for _ in range(mol_count):
@@ -186,17 +182,13 @@ def rewrite_gro_with_itp_data(atom_lines, molecules, mapping_dir="."):
                 atomname = atomname[:5].rjust(5)
                 xyz = old_line[20:44]
                 vel = old_line[44:]
-
                 atom_id_fmt = format_id(global_atom_id)
                 res_id_fmt = format_id(global_res_id)
-
                 new_line = f"{res_id_fmt:5d}{resname}{atomname}{atom_id_fmt:5d}{xyz}{vel}"
                 updated_lines.append(new_line + '\n')
-
                 global_atom_id += 1
                 idx += 1
             global_res_id += 1
-
     if idx != len(atom_lines):
         raise ValueError("Mismatch in total atom lines processed.")
     return updated_lines

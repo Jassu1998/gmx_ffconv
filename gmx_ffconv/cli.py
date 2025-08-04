@@ -13,7 +13,7 @@ def main():
     ffmap_parser.add_argument("-itp2", required=True, help="Second ITP file (path)", type=Path)
     ffmap_parser.add_argument("-name", required=True, help="Name of the molecule, does not need to match itp files")
     ffmap_parser.add_argument("--duplicate", action="store_true",
-                              help="Skip graph matching, create a mapping where everything is kept in same order. Useful for proteins, solvent,ions ")
+                              help="Skip graph matching, create a mapping where everything is kept in same order. Only useful when part of the coordinate file needs reordering. ")
     ffmap_parser.add_argument("--all_mappings", action="store_true",
                               help="Obtain all mappings, not recommended")
     ffmap_parser.add_argument("--validate", action="store_true",
