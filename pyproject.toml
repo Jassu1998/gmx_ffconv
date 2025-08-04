@@ -18,3 +18,10 @@ exclude = ["Tutorial"]
 [build-system]
 requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
+
+readme = "README.md"
+license = { file = "LICENSE" }
+
+[project.urls]
+"Homepage" = "https://github.com/Jassu1998/gmx_ffconv"
+"Bug Tracker" = "https://github.com/Jassu1998/gmx_ffconv/issues"
