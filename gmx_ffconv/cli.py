@@ -3,7 +3,16 @@ import argparse
 from pathlib import Path
 from gmx_ffconv.utilities.ffmap import run_ffmap
 from gmx_ffconv.utilities.groconv import run_groconv
+import sys
 
+if sys.platform != "win32":
+    import resource
+    soft, hard = resource.getrlimit(resource.RLIMIT_STACK)
+    if soft < hard:
+        try:
+            resource.setrlimit(resource.RLIMIT_STACK, (hard, hard))
+        except (ValueError, resource.error) as e:
+            print(f"⚠️  Could not raise stack size: {e}")
 def main():
     parser = argparse.ArgumentParser(description="Converts an all-atom system between 2 force fields")
     subparsers = parser.add_subparsers(dest="command", required=True)
