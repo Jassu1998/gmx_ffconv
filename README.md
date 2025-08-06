@@ -49,6 +49,9 @@ Possible issues:
 
 If the installation contains a message about installing an UNKNOWN package, please update your pip version. 
 
+If you are working on very large molecules, the default memory stack allocation can lead to a segfault error. This can easily be fixed by running   
+ulimit -s unlimited in the same terminal before invoking gmx_ffconv.
+
 # *Example:*
 
 The files are provided in “Tutorial” in folder Example1 
