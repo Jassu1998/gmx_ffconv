@@ -40,10 +40,15 @@ optional arguments:
 
 
 The recommended way of installing gmx_ffconv is with pip:
-pip install gmx_ffconv  
+```bash
+pip install gmx_ffconv 
+```
+ 
 [![PyPI version](https://img.shields.io/pypi/v/gmx_ffconv?label=PyPI)](https://pypi.org/project/gmx_ffconv/)
 Alternatively
-The easiest way to install gmx_ffconv is to clone the github, cd in gmx_ffconv and running pip install .
+The easiest way to install gmx_ffconv is to clone the github, cd in gmx_ffconv and running```bash
+pip install . 
+```
 Note, it is considered good practice to perform this in a virtual environment.
 
 Possible issues:
