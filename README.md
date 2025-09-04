@@ -109,7 +109,7 @@ We can now compare the AMBER_MEMB_from_CHARMM.gro to AMBER_MEMB_FF.gro, which wi
 # Citation 
 
 If you find my tool useful, please cite:
-Jasmine E. Aaltonen, gmx_ffconv: A Fast, User-Friendly Semi-Automated All-Atom Force Field Converter for GROMACS, under review (2025)
+Jasmine E. Aaltonen, gmx_ffconv: A Fast, User-Friendly Semi-Automated All-Atom Force Field Converter for GROMACS, under review (2025)  
 [![DOI](https://zenodo.org/badge/998544959.svg)](https://zenodo.org/badge/latestdoi/998544959)
 
 
