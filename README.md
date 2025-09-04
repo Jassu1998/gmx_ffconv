@@ -2,6 +2,7 @@
 gmx_ffconv is a semi-automated, all-atom force field converter for GROMACS.
 It has been developed to be fast and user-friendly, and doesn't require users to known any programming.  
 gmx_ffconv requires users to provide included topology files for the molecules they want to convert in the current and new force field, it does not generate or interpolate force field parameters.
+```bash
 # Usage: 
 gmx_ffconv ffmap -h  
 usage: gmx_ffconv ffmap [-h] -itp1 ITP1 -itp2 ITP2 -name NAME [--duplicate]
@@ -34,7 +35,7 @@ optional arguments:
   -output OUTPUT        Output .gro file name  
   --validate            Generate back-converted structure  
   --norename            Do not rename the reordered gro  
-
+```
 # Installation instructions:
 
 
@@ -50,7 +51,9 @@ Possible issues:
 If the installation contains a message about installing an UNKNOWN package, please update your pip version. 
 
 If you are working on very large molecules, the default memory stack allocation can lead to a segfault error. This can easily be fixed by running   
-ulimit -s unlimited in the same terminal before invoking gmx_ffconv.
+```bash
+ulimit -s unlimited
+``` in the same terminal before invoking gmx_ffconv.
 
 # *Example:*
 
@@ -85,9 +88,9 @@ gmx_ffconv ffmap -itp1 toppar_CHARMM/CLA.itp -itp2 toppar_AMBER/Cl-.itp -name CL
 These should have generated multiple mapping files, a mapping file per molecule type named mapping_{NAME}.csv.
 
 Now, that all mappings are obtained, the new coordinate file can be obtained via groconv
-
+```bash
 gmx_ffconv groconv -coordfile CHARMM_MEMB.gro -name DOPE DPPC CHL POT CLA TIP3P -nmol 24 24 24 6 6 2709 -output AMBER_MEMB_from_CHARMM.gro
-
+```
 We can now compare the AMBER_MEMB_from_CHARMM.gro to AMBER_MEMB_FF.gro, which will match in energy values if the conversion has been successful. This file is provided in the AMBER_REF folder with the necessary files.
 
 # Citation 
