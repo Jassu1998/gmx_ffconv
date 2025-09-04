@@ -62,28 +62,25 @@ A membrane containing 24 DOPE,24 DPPC,24 CHL, 6 K+, 6 Cl- and 2709 TIP3P molecul
 
 First, mappings for each molecule must be found. These commands can be run at the same time by the use of &. 
 
-DPPC
-
+```bash
+# DPPC
 gmx_ffconv ffmap -itp1 toppar_CHARMM/DPPC.itp -itp2 toppar_AMBER/PPPC.itp -name DPPC
 
-Cholesterol
-
+# Cholesterol
 gmx_ffconv ffmap -itp1 toppar_CHARMM/CHL1.itp -itp2 toppar_AMBER/CHL.itp -name CHL
 
-DOPE
-
+# DOPE
 gmx_ffconv ffmap -itp1 toppar_CHARMM/DOPE.itp -itp2 toppar_AMBER/OOPE.itp -name DOPE
 
-TIP3
+# TIP3
+gmx_ffconv ffmap -itp1 toppar_CHARMM/TIP3.itp -itp2 toppar_AMBER/TP3.itp -name TIP3P
 
-gmx_ffconv ffmap -itp1 toppar_CHARMM/TIP3.itp -itp2 toppar_AMBER/TP3.itp -name TIP3P 
-Potassium 
+# Potassium
+gmx_ffconv ffmap -itp1 toppar_CHARMM/POT.itp -itp2 toppar_AMBER/K+.itp -name POT
 
-gmx_ffconv ffmap -itp1 toppar_CHARMM/POT.itp -itp2 toppar_AMBER/K+.itp -name POT 
-Chloride
-
+# Chloride
 gmx_ffconv ffmap -itp1 toppar_CHARMM/CLA.itp -itp2 toppar_AMBER/Cl-.itp -name CLA 
-
+```
 
 These should have generated multiple mapping files, a mapping file per molecule type named mapping_{NAME}.csv.
 
