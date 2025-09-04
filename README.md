@@ -50,11 +50,17 @@ Possible issues:
 
 If the installation contains a message about installing an UNKNOWN package, please update your pip version. 
 
-If you are working on very large molecules, the default memory stack allocation can lead to a segfault error. This can easily be fixed by running   
+
+
+## Tips and tricks 
+(1) If you are working on very large molecules, the default memory stack allocation can lead to a segfault error. This can easily be fixed by running
+in the same terminal before invoking gmx ffconv.
 ```bash
 ulimit -s unlimited
 ```
-in the same terminal before invoking gmx_ffconv.
+(2) When building a database of mappings, for example from AMBER’s Lipid21 to CHARMM36m, storing the folder with the included topology files for the new force field inside the mappings directory enables groconv to find them without having to manually provide paths.
+
+(3) Using custom restraints: While most restraints (such as ones in the included topology files) are likely to be supported, in the case that the restraints file was generated using the old coordinate file, a new one must be generated using the new force field. Generating position restraints is easy, but for users that want to work with complex restraints that can't be easily regenerated, there is an easy fix. In the Scripts folder is included a Python script, which converts NMR restraint files (distance, dihedral and orientation) to match the new force field. The general approach consists of simply renaming atom indices using the order specified in the mapping csv.
 
 # *Example:*
 
