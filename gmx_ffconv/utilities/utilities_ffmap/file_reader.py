@@ -54,29 +54,32 @@ def read_atoms_section(filename):
             parts = stripped.split()
             if len(parts) >= 7:
                 atom_index = int(parts[0])
-                atom_mass = parts[7]  # Adjust this index if needed
+                atom_mass = parts[7]
                 element = assign_chemical_element_by_mass(atom_mass)
                 atoms[atom_index] = element
     return atoms
 
-def read_atoms_section_atomname(filename): #
-    with open(filename, 'r') as f:
-        lines = f.readlines()
+def read_atoms_section_atomname(filename):
     atoms = {}
     in_atoms = False
-    for line in lines:
-        stripped = line.strip()
-        if not in_atoms:
-            if stripped.lower().startswith('[') and 'atoms' in stripped.lower():
-                in_atoms = True
-        elif stripped == '':
-            break
-        elif not stripped.startswith(';'):
-            parts = stripped.split()
-            if len(parts) >= 5:
-                atom_index = int(parts[0])
-                atom_name = parts[4][0].upper() # First letter of atom type
-                atoms[atom_index] = atom_name
+    with open(filename, 'r') as f:
+        for line in f:
+            stripped = line.strip()
+            if not in_atoms:
+                if stripped.lower().startswith('[') and 'atoms' in stripped.lower():
+                    in_atoms = True
+            elif stripped == '' or stripped.startswith('['):
+                # End of atoms section
+                break
+            elif not stripped.startswith(';'):
+                parts = stripped.split()
+                if len(parts) >= 5:
+                    atom_index = int(parts[0])
+                    atom_mass = parts[7]
+                    element = assign_chemical_element_by_mass(atom_mass)
+                    atom_type = element
+                    atom_name = parts[4]  # full atom name
+                    atoms[atom_index] = {'atom_type': atom_type, 'atom_name': atom_name}
     return atoms
 
 def read_bonds_section(filename):

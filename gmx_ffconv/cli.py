@@ -18,6 +18,7 @@ def main():
                               help="Obtain all mappings, not recommended")
     ffmap_parser.add_argument("--validate", action="store_true",
                               help="Carry out conversion in both directions")
+    ffmap_parser.add_argument("--consistent_naming",type=Path,help="CSV file containing atom name equivalencies in both force fields")
     ffmap_parser.set_defaults(func=run_ffmap)
 
 
