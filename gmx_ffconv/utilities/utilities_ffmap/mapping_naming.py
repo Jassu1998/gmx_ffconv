@@ -44,10 +44,10 @@ def make_node_matcher(G1, G2, mode="relaxed"):
     def node_match(n1_attrs, n2_attrs, n1_id=None, n2_id=None):
         type1, name1 = n1_attrs.get('props', [None, None])
         type2, name2 = n2_attrs.get('props', [None, None])
-        # exact name match
-        if name1 and name2 and name1 == name2:
-            return True
-        # fallback: type must match
+        # If both have names, they must be the same
+        if name1 and name2 and name1 != name2:
+            return False
+        # Types must match
         if type1 != type2:
             return False
         # compare neighbors if node IDs are provided
@@ -155,7 +155,7 @@ def run_ffmap_naming(args):
         print("Counts match → using strict node matcher")
         matcher = GraphMatcher(G1, G2, node_match=make_node_matcher(G1, G2, mode="strict"))
     else:
-        print("Counts differ → using relaxed node matcher. The performance will take a hit.")
+        print("Counts differ → using relaxed node matcher. The performance might take a hit.")
         matcher = GraphMatcher(G1, G2, node_match=make_node_matcher(G1, G2, mode="relaxed"))
 
     if matcher.is_isomorphic():
