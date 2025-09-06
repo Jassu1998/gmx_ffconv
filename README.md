@@ -6,17 +6,23 @@ gmx_ffconv requires users to provide included topology files for the molecules t
 # Usage: 
 gmx_ffconv ffmap -h  
 usage: gmx_ffconv ffmap [-h] -itp1 ITP1 -itp2 ITP2 -name NAME [--duplicate]
-                        [--all_mappings] [--validate]  
+                        [--all_mappings] [--validate]
+                        [--consistent_naming CONSISTENT_NAMING]
 
-optional arguments:  
-  -h, --help      show this help message and exit  
-  -itp1 ITP1      First ITP file (path), corresponding to force field used in  
-                  .gro file
-  -itp2 ITP2      Second ITP file (path)  
-  -name NAME      Name of the molecule, does not need to match itp files  
-  --duplicate     Skip graph matching, create a mapping where everything is kept in same order. Only useful when part of the coordinate file needs reordering. 
-  --all_mappings  Obtain all mappings, not recommended  
-  --validate      Carry out conversion in both directions  
+optional arguments:
+  -h, --help            show this help message and exit
+  -itp1 ITP1            First ITP file (path), corresponding to force field
+                        used in .gro file
+  -itp2 ITP2            Second ITP file (path)
+  -name NAME            Name of the molecule, does not need to match itp files
+  --duplicate           Skip graph matching, create a mapping where everything
+                        is kept in same order. Only useful when part of the
+                        coordinate file needs reordering.
+  --all_mappings        Obtain all mappings, not recommended
+  --validate            Carry out conversion in both directions
+  --consistent_naming CONSISTENT_NAMING
+                        CSV file containing atom name equivalencies in both
+                        force fields 
 
 
 usage: gmx_ffconv groconv [-h] -name NAME [NAME ...] -nmol NMOL [NMOL ...]  
