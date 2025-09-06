@@ -2,6 +2,8 @@ from .file_reader import *
 from .graph_functions import *
 import csv
 from collections import Counter
+import networkx as nx
+from networkx.algorithms.isomorphism import GraphMatcher
 
 
 def build_graph_naming(atoms, bonds):
