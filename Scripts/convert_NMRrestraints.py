@@ -2,6 +2,12 @@ import numpy as np
 import csv
 import argparse
 
+#The following file is very heavily based on the nmr2gmx script by Anna Sinelnikova, David van der Spoel
+# Their code is available at https://github.com/dspoel/nmr2gmxpy/tree/v1.2, https://zenodo.org/records/4022973
+
+
+
+
 # Reads the original restraint itp, ignores first row or comment lines using ;
 def read_itp_file(filename):
     # Load all numbers as floats
