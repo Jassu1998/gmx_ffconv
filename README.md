@@ -72,7 +72,7 @@ ulimit -s unlimited
 ```
 (2) When building a database of mappings, for example from AMBER’s Lipid21 to CHARMM36m, storing the folder with the included topology files for the new force field inside the mappings directory enables groconv to find them without having to manually provide paths.
 
-(3) Using custom restraints: While most restraints (such as ones in the included topology files) are likely to be supported, in the case that the restraints file was generated using the old coordinate file, a new one must be generated using the new force field. Generating position restraints is easy, but for users that want to work with complex restraints that can't be easily regenerated, there is an easy fix. In the Scripts folder is included a Python script, which converts NMR restraint files (distance, dihedral and orientation) to match the new force field. The general approach consists of simply renaming atom indices using the order specified in the mapping csv.
+(3) Using custom restraints: While most restraints (such as ones in the included topology files) are likely to be supported, in the case that the restraints file was generated using the old coordinate file, a new one must be generated using the new force field. The general approach consists of simply renaming atom indices using the order specified in the mapping csv. Conversion scripts for position restraints and NMR restraint files (distance, dihedral and orientation) are included in the Scripts folder. Other ones will be written on request, if you need a conversion script please open an issue.
 
 # *Example:*
 
@@ -119,3 +119,7 @@ Jasmine E. Aaltonen, gmx_ffconv: A Fast, User-Friendly Semi-Automated All-Atom F
 [![DOI](https://zenodo.org/badge/998544959.svg)](https://zenodo.org/badge/latestdoi/998544959)
 
 
+# Contact details
+
+The best way to contact me is by opening an issue, I will happily provide clarifications and/or implement additional features.
+Alternatively, I can be reached by email at j.aaltonen@lancaster.ac.uk
